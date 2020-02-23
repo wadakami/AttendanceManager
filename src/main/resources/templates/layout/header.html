@@ -5,8 +5,8 @@
 </head>
 <body>
 	<div th:fragment="header" th:remove="tag">
-		<div>
-			<div style="display: block; margin-top: -11px; margin-left: -20px;"><img th:src="@{/image/logo.png}"></div>
+		<div style="display: flow-root;">
+			<div style="display: block; margin-top: -11px; margin-left: -20px; float: left;"><img th:src="@{/image/logo.png}"></div>
 	        <div id="nav-drawer">
 		        <input id="nav-input" type="checkbox" class="nav-unshown">
 		        <label id="nav-open" for="nav-input"><span></span></label>

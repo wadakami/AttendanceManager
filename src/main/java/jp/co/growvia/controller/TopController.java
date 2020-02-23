@@ -11,7 +11,6 @@ public class TopController {
 	private ModelAndView viewControll(ModelAndView mav) {
 		System.out.println();
 
-		String ghg = "aaa";
 
 
 		mav.setViewName("top");
