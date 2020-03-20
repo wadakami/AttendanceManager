@@ -6,22 +6,25 @@
 <body>
 	<div th:fragment="header" th:remove="tag">
 		<div style="display: flow-root;">
-			<div style="display: block; margin-top: -11px; margin-left: -20px; float: left;"><img th:src="@{/image/logo.png}"></div>
+			<div style="display: block; margin-top: -11px; margin-left: -20px; float: left;">
+				<a th:href="@{/top}">
+					<img th:src="@{/image/logo.png}">
+				</a>
+			</div>
 	        <div id="nav-drawer">
 		        <input id="nav-input" type="checkbox" class="nav-unshown">
 		        <label id="nav-open" for="nav-input"><span></span></label>
 		        <label class="nav-unshown" id="nav-close" for="nav-input"></label>
 
 		        <div id="nav-content">
-		        	<a th:href="@{/top}">トップ</a>
-		        	<a th:href="@{/login}">ログアウト</a>
+		        	<div class="side-contents">
+			        	<a th:href="@{/top}">トップ</a>
+		        	</div>
+		        	<div class="side-contents">
+			        	<a th:href="@{/login}">ログアウト</a>
+		        	</div>
 		        </div>
         	</div>
- 		 </div>
- 		 <div>
-	  		 <h1>
-			 	<a th:href="@{/}">勤怠管理</a>
-			 </h1>
  		 </div>
 	</div>
 </body>

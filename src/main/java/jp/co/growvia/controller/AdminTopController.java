@@ -11,7 +11,8 @@ public class AdminTopController {
 	@RequestMapping(value="/admin", method=RequestMethod.GET)
 	private ModelAndView viewControll(ModelAndView mav) {
 
-		mav.setViewName("login");
+		mav.setViewName("adminTop");
+
 		return mav;
 
 	}

@@ -1,10 +1,28 @@
 @charset "UTF-8";
 
+body {
+	font-family: 'Lato', 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', 'Meiryo', 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+	font-size: 1em;
+}
+
+input {
+	font-family: 'Avenir','Helvetica Neue','Helvetica','Arial','Hiragino Sans','ヒラギノ角ゴシック',YuGothic,'Yu Gothic','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic', sans-serif;
+	font-size: 1em;
+}
+
 footer {
   position: fixed;
   bottom: 0;
   width: 100%;
 }
+
+.selecter {
+  height: 27px;
+  width: 213px;
+  margin: auto;
+  margin-bottom: 13px;
+}
+
 
 #nav-drawer {
   position: relative;
@@ -12,7 +30,6 @@ footer {
   display:block;
 }
 
-/*チェックボックス等は非表示に*/
 .nav-unshown {
   display:none;
 }
@@ -20,16 +37,16 @@ footer {
 /*アイコンのスペース*/
 #nav-open {
   display: inline-block;
-  width: 30px;
-  height: 22px;
+  width: 35px;
+  height: 28px;
   vertical-align: middle;
+  margin : 16px 16px auto auto;
 }
 
-/*ハンバーガーアイコンをCSSだけで表現*/
 #nav-open span, #nav-open span:before, #nav-open span:after {
   position: absolute;
-  height: 3px;/*線の太さ*/
-  width: 25px;/*長さ*/
+  height: 4px;/*線の太さ*/
+  width: 35px;/*長さ*/
   border-radius: 3px;
   background: #555;
   display: block;
@@ -37,10 +54,10 @@ footer {
   cursor: pointer;
 }
 #nav-open span:before {
-  bottom: -8px;
+  bottom: -10px;
 }
 #nav-open span:after {
-  bottom: -16px;
+  bottom: -20px;
 }
 
 /*閉じる用の薄黒カバー*/
@@ -62,15 +79,19 @@ footer {
   overflow: auto;
   position: fixed;
   top: 0;
-  left: 0;
   z-index: 9999;/*最前面に*/
-  width: 90%;/*右側に隙間を作る（閉じるカバーを表示）*/
+  width: 72%;/*右側に隙間を作る（閉じるカバーを表示）*/
   max-width: 330px;/*最大幅（調整してください）*/
   height: 100%;
   background: #fff;/*背景色*/
   transition: .3s ease-in-out;/*滑らかに表示*/
-  -webkit-transform: translateX(-105%);
-  transform: translateX(-105%);/*左に隠しておく*/
+  -webkit-transform: translateX(138%);
+  transform: translateX(138%);/*左に隠しておく*/
+  text-align: left;
+}
+
+.side-contents {
+	margin: 25px 0px 0px 5px;
 }
 
 /*チェックが入ったらもろもろ表示*/

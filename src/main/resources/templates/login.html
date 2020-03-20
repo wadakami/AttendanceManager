@@ -1,18 +1,31 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.tymeleaf.org"
-	th:replace="~{layout/template :: layout(~{::title},~{::body/content()})}">
+<html xmlns:th="http://www.tymeleaf.org">
 <head>
+<meta http-equiv="content-Type"
+	content="text/html" charset="UTF-8" />
+<meta name="viewport" content="width=device-width">
 <title>ログイン</title>
-<style></style>
+<link rel="stylesheet" th:href="@{/css/template.css}" type="text/css"
+    media="screen, projection">
+<link href="https://fonts.googleapis.com/css?family=Lato:400,700|Noto+Sans+JP:400,700" rel="stylesheet">
 </head>
 <body>
-	<form action="" method="post">
+	<div style="display: flow-root;">
+		<div style="display: block; margin-top: -11px; margin-left: -20px; float: left;">
+			<img th:src="@{/image/logo.png}">
+		</div>
+	</div>
+	<form action="" method="post" style="margin-top: 110px;">
 		<div style="text-align: center; display: grid;">
-			<p>Please fill out blank.</p>
-			<input type="text" placeholder="username" style="height: 23px; width: 210px; margin: auto; margin-bottom: 13px;" />
-			<input type="password" placeholder="password" style="height: 23px; width: 210px; margin: auto;" />
-			<input type="button" value="Login" style="margin: 10px 56px 0 auto; width: 80px;"  />
+			<h3>GrowVia勤怠システムへのログイン</h3>
+			<input type="text" placeholder="ユーザー名" style="height: 23px; width: 210px; margin: auto; margin-bottom: 13px;" />
+			<input type="password" placeholder="パスワード" style="height: 23px; width: 210px; margin:10px auto;" />
+			<input type="button" value="Login" onclick="location.href='./top'" style="margin: 25px auto 0 auto; width: 211px; height: 30px; "  />
 		</div>
 	</form>
+	<footer>
+		<p style="text-align: center; background: #e5eCf9;">Copyright &copy; 2020 GrowVia</p>
+	</footer>
+
 </body>
 </html>
