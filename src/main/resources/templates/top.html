@@ -7,9 +7,13 @@
 </head>
 <body>
 	<h2>勤怠メニュー</h2>
-	<input type="button" value="管理者メニュー" onclick="location.href='./admin'" style="display: block; height: 35px;width: 130px; margin-left: 25px; margin-top: 45px;" />
+	<div style="margin-top: 45px;">
+		<input type="button" value="管理者メニュー" onclick="location.href='./admin'" style="float:left; height: 35px;width: 130px; margin-left: 25px;" />
+		<input type="button" value="承認者メニュー" onclick="location.href='./requesterList'"  style="float: right; height: 35px;width: 130px; margin-right: 25px;" />
+	</div>
+	<div style="clear: both;"></div>
 	<input type="button" value="出勤/退勤" onclick="location.href='./attended'" style="display: block; width: 150px; height: 100px; margin: 55px auto; " />
-	<input type="button" value="承認者メニュー" onclick="location.href='./requesterList'" style="display: block; float: left; height: 35px;width: 130px; margin-left: 25px;" />
+	<input type="button" value="基本情報編集" onclick="location.href='./editBasicInf'" style="display: block; float: left; height: 35px;width: 130px; margin-left: 25px;" />
 	<input type="button" value="勤怠編集" onclick="location.href='./editWorkTime'" style="float: right; height: 35px;width: 115px; margin-right: 25px;" />
 </body>
 </html>

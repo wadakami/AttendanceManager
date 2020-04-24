@@ -5,9 +5,10 @@
 	content="text/html" charset="UTF-8" />
 <meta name="viewport" content="width=device-width">
 <title th:replace="${title}">Attendance Manage Application</title>
-<link rel="stylesheet" th:href="@{/css/template.css}" type="text/css"
-    media="screen, projection">
-<link href="https://fonts.googleapis.com/css?family=Lato:400,700|Noto+Sans+JP:400,700" rel="stylesheet">
+<script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<link rel="stylesheet" th:href="@{webjars/bootstrap/4.4.1/css/bootstrap.min.css}" type="text/css">
+<script type="text/javascript" th:src="@{webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
+<link rel="stylesheet" th:href="@{/css/template.css}" type="text/css" media="screen, projection">
 </head>
 <body>
 	<div id="header" th:replace="~{layout/header :: header}"></div>

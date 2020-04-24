@@ -1,13 +1,14 @@
 package jp.co.growvia.controller;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+@RestController
 public class TopController {
 
-	@RequestMapping("/top")
+	@RequestMapping(value="/top", method=RequestMethod.GET)
 	private ModelAndView viewControll(ModelAndView mav) {
 		System.out.println();
 

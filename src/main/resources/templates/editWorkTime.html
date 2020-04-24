@@ -6,12 +6,16 @@
 <style></style>
 </head>
 <body>
-	<div>
-		<input type="button" value="基本情報編集" onclick="location.href='./editBasicInf'" style="display: block; height: 35px;width: 115px;" />
+	<div style="display: flex; margin-top:10px;margin-left:15px;">
+		<input type="button" value="＜" onclick="window.history.go(-1);" class="btn btn-primary rounded-circle p-0" style="width:2rem;height:2rem;" />
+		<h2 style="margin-top:3px;">勤怠編集</h2>
+	</div>
+
+	<div style="margin: 0 20px 0 12px;">
 		<p style="float: left">案件名：</p>
 		<p style="text-align: right;">社員番号―氏名</p>
 	</div>
-	<p style="margin: 5px">◀ 2019 ▶</p>
+	<p style="margin: 5px">◀  2019/1 ▶</p>
 	<table style="margin: 15px auto 15px auto; text-align: center;" >
 		<tr>
 			<th>日付</th>
@@ -25,72 +29,155 @@
 			<td>1</td>
 			<td>月</td>
 			<td>
-				<select>
+				<select style="height: 25px;">
 					<option>出勤</option>
 					<option>休日</option>
 					<option>有給</option>
 				</select>
 			</td>
-			<td>9:00</td>
-			<td>18:00</td>
-			<td>1:00</td>
+			<td>
+				<input type="text" value="9:00" style="width: 48px;height: 22px; text-align: center;" />
+			</td>
+			<td>
+				<input type="text" value="18:00" style="width: 48px;height: 22px; text-align: center;" />
+			<td>
+				<input type="text" value="1:00" style="width: 48px;height: 22px; text-align: center;" />
+			</td>
 		</tr>
 		<tr>
 			<td>2</td>
 			<td>火</td>
 			<td>
-				<select>
+				<select style="height: 25px;">
 					<option>出勤</option>
 					<option>休日</option>
 					<option>有給</option>
 				</select>
 			</td>
-			<td>9:00</td>
-			<td>18:00</td>
-			<td>1:00</td>
+			<td>
+				<input type="text" value="9:00" style="width: 48px;height: 22px; text-align: center;" />
+			</td>
+			<td>
+				<input type="text" value="18:00" style="width: 48px;height: 22px; text-align: center;" />
+			<td>
+				<input type="text" value="1:00" style="width: 48px;height: 22px; text-align: center;" />
+			</td>
 		</tr>
 		<tr>
 			<td>3</td>
 			<td>水</td>
 			<td>
-				<select>
+				<select style="height: 25px;">
 					<option>出勤</option>
 					<option>休日</option>
 					<option>有給</option>
 				</select>
 			</td>
-			<td>9:00</td>
-			<td>18:00</td>
-			<td>1:00</td>
+			<td>
+				<input type="text" value="9:00" style="width: 48px;height: 22px; text-align: center;" />
+			</td>
+			<td>
+				<input type="text" value="18:00" style="width: 48px;height: 22px; text-align: center;" />
+			<td>
+				<input type="text" value="1:00" style="width: 48px;height: 22px; text-align: center;" />
+			</td>
 		</tr>
 		<tr>
 			<td>4</td>
 			<td>木</td>
 			<td>
-				<select>
+				<select style="height: 25px;">
 					<option>出勤</option>
 					<option>休日</option>
 					<option>有給</option>
 				</select>
 			</td>
-			<td>9:00</td>
-			<td>18:00</td>
-			<td>1:00</td>
+			<td>
+				<input type="text" value="9:00" style="width: 48px;height: 22px; text-align: center;" />
+			</td>
+			<td>
+				<input type="text" value="18:00" style="width: 48px;height: 22px; text-align: center;" />
+			<td>
+				<input type="text" value="1:00" style="width: 48px;height: 22px; text-align: center;" />
+			</td>
 		</tr>
 		<tr>
 			<td>5</td>
 			<td>金</td>
 			<td>
-				<select>
+				<select style="height: 25px;">
 					<option>出勤</option>
 					<option>休日</option>
 					<option>有給</option>
 				</select>
 			</td>
-			<td>9:00</td>
-			<td>18:00</td>
-			<td>1:00</td>
+			<td>
+				<input type="text" value="9:00" style="width: 48px;height: 22px; text-align: center;" />
+			</td>
+			<td>
+				<input type="text" value="18:00" style="width: 48px;height: 22px; text-align: center;" />
+			<td>
+				<input type="text" value="1:00" style="width: 48px;height: 22px; text-align: center;" />
+			</td>
 		</tr>
+		<tr>
+			<td>6</td>
+			<td>土</td>
+			<td>
+				<select style="height: 25px;">
+					<option>出勤</option>
+					<option selected>休日</option>
+					<option>有給</option>
+				</select>
+			</td>
+			<td>
+				<input type="text" value="-" style="width: 48px;height: 22px; text-align: center;" />
+			</td>
+			<td>
+				<input type="text" value="-" style="width: 48px;height: 22px; text-align: center;" />
+			<td>
+				<input type="text" value="-" style="width: 48px;height: 22px; text-align: center;" />
+			</td>
+		</tr>
+		<tr>
+			<td>7</td>
+			<td>日</td>
+			<td>
+				<select style="height: 25px;">
+					<option>出勤</option>
+					<option selected>休日</option>
+					<option>有給</option>
+				</select>
+			</td>
+			<td>
+				<input type="text" value="-" style="width: 48px;height: 22px; text-align: center;" />
+			</td>
+			<td>
+				<input type="text" value="-" style="width: 48px;height: 22px; text-align: center;" />
+			<td>
+				<input type="text" value="-" style="width: 48px;height: 22px; text-align: center;" />
+			</td>
+		</tr>
+		<tr>
+			<td>8</td>
+			<td>月</td>
+			<td>
+				<select style="height: 25px;">
+					<option>出勤</option>
+					<option>休日</option>
+					<option>有給</option>
+				</select>
+			</td>
+			<td>
+				<input type="text" value="9:00" style="width: 48px;height: 22px; text-align: center;" />
+			</td>
+			<td>
+				<input type="text" value="18:00" style="width: 48px;height: 22px; text-align: center;" />
+			<td>
+				<input type="text" value="1:00" style="width: 48px;height: 22px; text-align: center;" />
+			</td>
+		</tr>
+
 	</table>
 	<div style="position: fixed; bottom: 60px;">
 		<input type="button" value="保存" style="margin-left: 10px; height: 35px;width: 115px;" />

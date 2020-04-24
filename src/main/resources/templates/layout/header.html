@@ -6,7 +6,7 @@
 <body>
 	<div th:fragment="header" th:remove="tag">
 		<div style="display: flow-root;">
-			<div style="display: block; margin-top: -11px; margin-left: -20px; float: left;">
+			<div style="display: block; float: left;">
 				<a th:href="@{/top}">
 					<img th:src="@{/image/logo.png}">
 				</a>
@@ -21,7 +21,10 @@
 			        	<a th:href="@{/top}">トップ</a>
 		        	</div>
 		        	<div class="side-contents">
-			        	<a th:href="@{/login}">ログアウト</a>
+			        	<a th:href="@{/logout}">ログアウト</a>
+		        	</div>
+		        	<div class="side-contents">
+			        	<a th:href="@{/editBasicInf}">基本情報編集</a>
 		        	</div>
 		        </div>
         	</div>

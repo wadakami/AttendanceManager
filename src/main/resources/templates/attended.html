@@ -6,15 +6,19 @@
 <style></style>
 </head>
 <body>
-	<h2>勤怠完了</h2>
+	<div style="display: flex; margin-top:30px;margin-left:15px;">
+		<input type="button" value="＜" onclick="window.history.go(-1);" class="btn btn-primary rounded-circle p-0" style="width:2rem;height:2rem;" />
+		<h2 style="margin-top:3px;">勤怠完了</h2>
+	</div>
 
 	<div class="attended-display" style="margin: 100px auto; text-align: center; ">
 		<p>2019/12/20 08:50</p>
 		<p>出勤しました。</p>
 	</div>
-
-	<input type="button" value="Logout" onclick="location.href='./login'" style="display: block; float: left; height: 35px;width: 115px;" />
-	<input type="button" value="勤怠編集" onclick="location.href='./editWorkTime'" style="float: right; height: 35px;width: 115px;" />
+	<div style="margin: 0 12px;">
+		<input type="button" value="ログアウト" onclick="location.href='./login'" style="display: block; float: left; height: 35px;width: 115px;" />
+		<input type="button" value="勤怠編集" onclick="location.href='./editWorkTime'" style="float: right; height: 35px;width: 115px;" />
+	</div>
 
 </body>
 </html>

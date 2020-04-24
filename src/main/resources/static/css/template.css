@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 body {
-	font-family: 'Lato', 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', 'Meiryo', 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+	font-family: 'Avenir','Helvetica Neue','Helvetica','Arial','Hiragino Sans','ヒラギノ角ゴシック',YuGothic,'Yu Gothic','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic', sans-serif;
 	font-size: 1em;
 }
 
@@ -9,6 +9,18 @@ input {
 	font-family: 'Avenir','Helvetica Neue','Helvetica','Arial','Hiragino Sans','ヒラギノ角ゴシック',YuGothic,'Yu Gothic','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic', sans-serif;
 	font-size: 1em;
 }
+
+h2 {
+	display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
 
 footer {
   position: fixed;
@@ -40,7 +52,7 @@ footer {
   width: 35px;
   height: 28px;
   vertical-align: middle;
-  margin : 16px 16px auto auto;
+  margin : 25px 25px auto auto;
 }
 
 #nav-open span, #nav-open span:before, #nav-open span:after {

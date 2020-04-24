@@ -7,7 +7,10 @@
 </style>
 </head>
 <body>
-	<h2>基本情報編集</h2>
+	<div style="display: flex; margin-top:30px;margin-left:15px;">
+		<input type="button" value="＜" onclick="window.history.go(-1);" class="btn btn-primary rounded-circle p-0" style="width:2rem;height:2rem;" />
+		<h2 style="margin-top:3px;">基本情報編集</h2>
+	</div>
 	<div style="text-align: center;">
 		<div>
 			<p style="display: contents;">　案件名：</p>
@@ -24,22 +27,6 @@
 		<div>
 			<p style="display: contents;">休憩時間：</p>
 			<input type="text" placeholder="休憩時間" style="height: 23px; width: 210px; margin: auto; margin-bottom: 13px;" />
-		</div>
-		<div>
-			<p style="display: contents;">承認者１：</p>
-			<select name="accepter1" class="selecter">
-				<option value=""></option>
-				<option value="test" selected>野比のび太</option>
-				<option value="test">剛田武</option>
-			</select>
-		</div>
-		<div>
-			<p style="display: contents;">承認者２：</p>
-			<select name="accepter2" class="selecter">
-				<option value=""></option>
-				<option value="test">野比のび太</option>
-				<option value="test" selected>剛田武</option>
-			</select>
 		</div>
 	</div>
 	<input type="button" value="変更" style="margin: 10px 30px 0 auto; width: 80px; display: block;"  />

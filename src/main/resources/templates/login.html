@@ -5,9 +5,9 @@
 	content="text/html" charset="UTF-8" />
 <meta name="viewport" content="width=device-width">
 <title>ログイン</title>
-<link rel="stylesheet" th:href="@{/css/template.css}" type="text/css"
-    media="screen, projection">
-<link href="https://fonts.googleapis.com/css?family=Lato:400,700|Noto+Sans+JP:400,700" rel="stylesheet">
+<script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
+<link rel="stylesheet" th:href="@{/css/template.css}" type="text/css" media="screen, projection">
 </head>
 <body>
 	<div style="display: flow-root;">
@@ -15,17 +15,31 @@
 			<img th:src="@{/image/logo.png}">
 		</div>
 	</div>
-	<form action="" method="post" style="margin-top: 110px;">
-		<div style="text-align: center; display: grid;">
-			<h3>GrowVia勤怠システムへのログイン</h3>
-			<input type="text" placeholder="ユーザー名" style="height: 23px; width: 210px; margin: auto; margin-bottom: 13px;" />
-			<input type="password" placeholder="パスワード" style="height: 23px; width: 210px; margin:10px auto;" />
-			<input type="button" value="Login" onclick="location.href='./top'" style="margin: 25px auto 0 auto; width: 211px; height: 30px; "  />
-		</div>
-	</form>
-	<footer>
-		<p style="text-align: center; background: #e5eCf9;">Copyright &copy; 2020 GrowVia</p>
-	</footer>
+	<div style="text-align: center; display: grid;">
 
+		<form th:action="@{/top}" method="POST" style="margin-top: 110px;">
+			<h3>GrowVia勤怠システムへのログイン</h3>
+	        <div th:if="${param.error}">
+	            Invalid username and password.
+	        </div>
+	        <div th:if="${param.logout}">
+	            You have been logged out.
+	        </div>
+			<input type="text"  name="username" placeholder="ユーザー名" style="height: 23px; width: 210px; margin: auto; margin-bottom: 13px;" />
+			<input type="password" name="password" placeholder="パスワード" style="height: 23px; width: 210px; margin:10px auto;" />
+			<input id="test" type="submit" value="ログイン" style="margin: 25px auto 0 auto; width: 211px; height: 30px; "  />
+		</form>
+	</div>
+	<footer style="text-align: center; background: #e5eCf9;">
+		<small>&copy; 2020 GrowVia, Inc.</small>
+	</footer>
+	<script th:inline="javascript">
+	var error = /*[[${param}]]*/
+	var logout = /*[[${param.logout}]]*/
+
+	$(function(){
+
+    });
+    </script>
 </body>
 </html>
