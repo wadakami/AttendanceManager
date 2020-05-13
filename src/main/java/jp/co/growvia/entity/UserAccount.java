@@ -11,6 +11,9 @@ import javax.persistence.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "useraccount")
 public class UserAccount implements UserDetails {
@@ -27,7 +30,7 @@ public class UserAccount implements UserDetails {
 	private String password;
 
 	@Column(nullable = true)
-	private String name;
+	private String kanjiname;
 
 	@Column(nullable = true)
 	private String hiraname;
@@ -41,6 +44,8 @@ public class UserAccount implements UserDetails {
 	@Column(nullable = true)
 	private boolean enabled;
 
+	@Column(nullable = false)
+	private LocalDate tempdate;
 
 	public long getId() {
 		return id;

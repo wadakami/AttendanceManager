@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class EditBasicInfController {
 	@RequestMapping(value="/editBasicInf", method=RequestMethod.GET)
-	private ModelAndView viewControll(ModelAndView mav) {
+	public ModelAndView viewControll(ModelAndView mav) {
 
 		mav.setViewName("editBasicInf");
 

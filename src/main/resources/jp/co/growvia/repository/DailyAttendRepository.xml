@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.growvia.repository.DailyAttendRepository">
+
+    <select id="findByUsernameAndDate" resultType="jp.co.growvia.entity.DailyAttendance">
+        SELECT *
+        FROM dailyattendance
+        WHERE username = #{username}
+        AND attenddate = #{attenddate}
+    </select>
+
+
+    <insert id="saveAttendDateTime" >
+        INSERT INTO dailyattendance (username, attenddate, starttime, updatetime)
+        VALUES (#{username}, #{attenddate}, #{starttime}, #{updatetime})
+    </insert>
+
+    <update id="updateAttendDateTime" >
+        UPDATE dailyattendance
+        SET endtime = #{endtime}, updatetime = #{updatetime}
+        WHERE username = #{username}
+        AND attenddate = #{attenddate}
+    </update>
+
+</mapper>

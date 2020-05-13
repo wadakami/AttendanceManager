@@ -10,7 +10,7 @@ public class LoginController {
 
 
 	@RequestMapping(value="/login", method=RequestMethod.GET)
-	private ModelAndView viewControll(ModelAndView mav) {
+	public ModelAndView viewControll(ModelAndView mav) {
 
 		mav.addObject("iserror", false);
 		mav.setViewName("login");
@@ -21,7 +21,7 @@ public class LoginController {
 	}
 
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	private ModelAndView viewControlla(ModelAndView mav) {
+	public ModelAndView viewControlla(ModelAndView mav) {
 
 		mav.addObject("iserror", false);
 		mav.setViewName("top");
@@ -32,7 +32,7 @@ public class LoginController {
 	}
 
 	@RequestMapping(value="/error", method=RequestMethod.POST)
-	private ModelAndView viewControlls(ModelAndView mav) {
+	public ModelAndView viewControlls(ModelAndView mav) {
 
 		mav.addObject("iserror", true);
 		mav.setViewName("login");
@@ -43,7 +43,7 @@ public class LoginController {
 	}
 
 	@RequestMapping(value="/error", method=RequestMethod.GET)
-	private ModelAndView viewControllss(ModelAndView mav) {
+	public ModelAndView viewControllss(ModelAndView mav) {
 
 		mav.addObject("iserror", true);
 		mav.setViewName("login");

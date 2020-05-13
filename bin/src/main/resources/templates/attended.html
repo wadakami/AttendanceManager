@@ -12,20 +12,13 @@
 	</div>
 
 	<div class="attended-display" style="margin: 100px auto; text-align: center; ">
-		<p th:text="${dateTime}"></p>
-		<p>
-			<span th:if="${attendStatus}">出勤</span>
-			<span th:unless="${attendStatus}">退勤</span>
-		しました。</p>
+		<p>2019/12/20 08:50</p>
+		<p>出勤しました。</p>
 	</div>
 	<div style="margin: 0 12px;">
 		<input type="button" value="ログアウト" onclick="location.href='./login'" style="display: block; float: left; height: 35px;width: 115px;" />
 		<input type="button" value="勤怠編集" onclick="location.href='./editWorkTime'" style="float: right; height: 35px;width: 115px;" />
 	</div>
-	<script th:inline="javascript">
-		var date = /*[[${dateTime}]]*/ ;
-		var date = /*[[${attendStatus}]]*/ ;
 
-	</script>
 </body>
 </html>

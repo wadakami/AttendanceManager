@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class EditWorkTimeController {
 	@RequestMapping(value="/editWorkTime", method=RequestMethod.GET)
-	private ModelAndView viewControll(ModelAndView mav) {
+	public ModelAndView viewControll(ModelAndView mav) {
 
 		mav.setViewName("editWorkTime");
 

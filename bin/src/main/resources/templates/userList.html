@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.tymeleaf.org"
+	th:replace="~{layout/template :: layout(~{::title},~{::body/content()})}">
+<head>
+<title>ユーザ一覧</title>
+<style></style>
+</head>
+<body>
+	<div style="display: flex; margin-top:30px;margin-left:15px;">
+		<input type="button" value="＜" onclick="window.history.go(-1);" class="btn btn-primary rounded-circle p-0" style="width:2rem;height:2rem;" />
+		<h2 style="margin-top:3px;">社員一覧</h2>
+	</div>
+	<table style="text-align: center; margin: auto; width: 96%;">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>名前</th>
+				<th>入社日</th>
+				<th>承認担当者</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>001</td>
+				<td>鈴木太郎</td>
+				<td>2018/12/12</td>
+				<td>上司A</td>
+			</tr>
+			<tr>
+				<td>002</td>
+				<td>田中太郎</td>
+				<td>2018/12/12</td>
+				<td>上司A</td>
+			</tr>
+			<tr>
+				<td>003</td>
+				<td>伊藤太郎</td>
+				<td>2018/12/12</td>
+				<td>上司A</td>
+			</tr>
+			<tr>
+				<td>004</td>
+				<td>佐藤太郎</td>
+				<td>2018/12/12</td>
+				<td>上司A</td>
+			</tr>
+			<tr>
+				<td>005</td>
+				<td>梶原太郎</td>
+				<td>2018/12/12</td>
+				<td>上司A</td>
+			</tr>
+			<tr>
+				<td>006</td>
+				<td>岡村太郎</td>
+				<td>2018/12/12</td>
+				<td>上司A</td>
+			</tr>
+			<tr>
+				<td>007</td>
+				<td>矢部太郎</td>
+				<td>2018/12/12</td>
+				<td>上司A</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

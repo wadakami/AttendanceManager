@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class AdmitController {
 
 	@RequestMapping(value="/admit", method=RequestMethod.GET)
-	private ModelAndView viewControll(ModelAndView mav) {
+	public ModelAndView viewControll(ModelAndView mav) {
 
 		mav.setViewName("admit");
 

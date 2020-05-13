@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class HolidayListController {
 
 	@RequestMapping(value="/holidayList", method=RequestMethod.GET)
-	private ModelAndView viewControll(ModelAndView mav) {
+	public ModelAndView viewControll(ModelAndView mav) {
 
 		mav.setViewName("holidayList");
 

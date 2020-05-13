@@ -20,10 +20,10 @@
 		<form th:action="@{/top}" method="POST" style="margin-top: 110px;">
 			<h3>GrowVia勤怠システムへのログイン</h3>
 	        <div th:if="${param.error}">
-	            ユーザー名かパスワードが正しくありません。
+	            Invalid username and password.
 	        </div>
 	        <div th:if="${param.logout}">
-	            ログアウトに成功しました。
+	            You have been logged out.
 	        </div>
 			<input type="text"  name="username" placeholder="ユーザー名" style="height: 23px; width: 210px; margin: auto; margin-bottom: 13px;" />
 			<input type="password" name="password" placeholder="パスワード" style="height: 23px; width: 210px; margin:10px auto;" />
@@ -33,5 +33,13 @@
 	<footer style="text-align: center; background: #e5eCf9;">
 		<small>&copy; 2020 GrowVia, Inc.</small>
 	</footer>
+	<script th:inline="javascript">
+	var error = /*[[${param}]]*/
+	var logout = /*[[${param.logout}]]*/
+
+	$(function(){
+
+    });
+    </script>
 </body>
 </html>
