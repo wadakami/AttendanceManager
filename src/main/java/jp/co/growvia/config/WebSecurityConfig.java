@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.anyRequest().authenticated()
 			.and()
 		.formLogin()
-			.loginProcessingUrl("/top")
+			.loginProcessingUrl("/authenticate")
 			.loginPage("/login")
 			.usernameParameter("username")
 			.passwordParameter("password")
@@ -55,8 +55,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 		.sessionManagement()
 			.maximumSessions(1)
-			.maxSessionsPreventsLogin(true)
-			.expiredSessionStrategy(new SessionManagement())
+			.maxSessionsPreventsLogin(false)
+			.expiredUrl("/login")
+			.expiredSessionStrategy(new SessionManagement()
+			)
 		;
 
 	}

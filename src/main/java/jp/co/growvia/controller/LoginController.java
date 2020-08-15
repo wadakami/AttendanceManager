@@ -9,48 +9,18 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController {
 
 
-	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public ModelAndView viewControll(ModelAndView mav) {
-
-		mav.addObject("iserror", false);
-		mav.setViewName("login");
-
-
-		return mav;
-
-	}
-
-	@RequestMapping(value="/login", method=RequestMethod.POST)
+	@RequestMapping(value="/authenticate", method=RequestMethod.POST)
 	public ModelAndView viewControlla(ModelAndView mav) {
 
 		mav.addObject("iserror", false);
 		mav.setViewName("top");
 
+		System.out.println("b");
 
 		return mav;
 
 	}
 
-	@RequestMapping(value="/error", method=RequestMethod.POST)
-	public ModelAndView viewControlls(ModelAndView mav) {
 
-		mav.addObject("iserror", true);
-		mav.setViewName("login");
-
-
-		return mav;
-
-	}
-
-	@RequestMapping(value="/error", method=RequestMethod.GET)
-	public ModelAndView viewControllss(ModelAndView mav) {
-
-		mav.addObject("iserror", true);
-		mav.setViewName("login");
-
-
-		return mav;
-
-	}
 
 }

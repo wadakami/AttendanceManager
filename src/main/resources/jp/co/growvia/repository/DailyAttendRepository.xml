@@ -4,24 +4,164 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jp.co.growvia.repository.DailyAttendRepository">
 
-    <select id="findByUsernameAndDate" resultType="jp.co.growvia.entity.DailyAttendance">
+    <select id="findByUseridAndDate" resultType="jp.co.growvia.entity.DailyAttendance">
         SELECT *
         FROM dailyattendance
-        WHERE username = #{username}
+        WHERE userid = #{userid}
         AND attenddate = #{attenddate}
+    </select>
+
+    <select id="findProjectById" resultType="jp.co.growvia.entity.ProjectStatus">
+        SELECT *
+        FROM projectstatus
+        WHERE projectid = #{projectid}
+    </select>
+
+    <select id="findAllAttend" resultType="jp.co.growvia.entity.DailyAttendance">
+    <![CDATA[
+        SELECT *
+        FROM dailyattendance
+        WHERE userid = #{userid}
+        AND (attenddate >= #{firstday} AND attenddate <= #{lastday})
+    ]]>
     </select>
 
 
     <insert id="saveAttendDateTime" >
-        INSERT INTO dailyattendance (username, attenddate, starttime, updatetime)
-        VALUES (#{username}, #{attenddate}, #{starttime}, #{updatetime})
+        INSERT INTO dailyattendance (userid, attenddate, starttime, endtime, updatetime, status)
+        VALUES (#{userid}, #{attenddate}, #{starttime}, #{endtime}, #{updatetime}, #{status})
+     	ON CONFLICT ON CONSTRAINT dailyattendance_pkc
+		DO UPDATE SET
+		starttime = #{starttime},
+		endtime = #{endtime},
+		updatetime = #{updatetime},
+		status = #{status};
     </insert>
 
     <update id="updateAttendDateTime" >
         UPDATE dailyattendance
-        SET endtime = #{endtime}, updatetime = #{updatetime}
-        WHERE username = #{username}
+        SET endtime = #{endtime}, updatetime = #{updatetime}, resttime = #{resttime}
+        WHERE userid = #{userid}
         AND attenddate = #{attenddate}
     </update>
+
+<!-- 使わなくなる予定 -->
+    <insert id="saveProject" >
+        INSERT INTO projectstatus (username, project, starttime, endtime, resttime)
+        VALUES (#{username}, #{project}, #{starttime}, #{endtime}, #{resttime})
+    </insert>
+
+<!-- 使わなくなる予定 -->
+    <update id="updateProject" >
+        UPDATE projectstatus
+        SET project = #{project}, starttime = #{starttime}, endtime = #{endtime}, resttime = #{resttime}
+        WHERE username = #{username}
+    </update>
+
+
+
+    <insert id="saveMonthUtilToday" >
+
+           <foreach item="item" collection="month" >
+		        INSERT INTO dailyattendance (userid, attenddate, starttime, endtime, resttime, status)
+		        VALUES
+				(#{userid}, TO_DATE(#{item.date}, 'YYYY/MM/DD'), #{item.start}, #{item.end}, #{item.rest}, #{item.status})
+				 ON CONFLICT ON CONSTRAINT dailyattendance_pkc
+				 DO UPDATE SET
+				 starttime = #{item.start},
+				 endtime = #{item.end},
+				 resttime = #{item.rest},
+				 status = #{item.status}
+				 ;
+		   </foreach>
+    </insert>
+
+    <insert id="saveRequestDay" useGeneratedKeys="true" keyProperty="requestid" keyColumn="requestid">
+        INSERT INTO requeststatus (userid, authorizer, requestday, status, targetmonth)
+        VALUES ( #{userid}, #{authorizer}, #{requestday}, #{status}, #{targetmonth})
+		 ;
+
+    </insert>
+
+    <insert id="saveComment" >
+        INSERT INTO comments (requestid, commenter, comment, requestday, status)
+        VALUES (#{requestid}, #{commenter}, #{comment}, #{requestday}, #{status})
+    </insert>
+
+    <update id="updateRequestStatus" >
+        UPDATE requeststatus
+        SET status = #{status}
+        WHERE requestid = #{requestid}
+
+    </update>
+
+<!-- 解析して修正 -->
+    <select id="getAllRequester" resultType="jp.co.growvia.entity.RequestStatus">
+		SELECT
+		rs.requestid,
+		rs.userid,
+		rs.requestday,
+		rs.status,
+		rs.targetmonth,
+		rs.authorizer,
+		ua.kanjiname as username
+		FROM
+		requeststatus rs LEFT JOIN useraccount ua ON rs.userid = ua.userid
+		WHERE
+		requestday >= #{limitday} AND (rs.authorizer = #{authorizer} OR ua.authorizer = #{authorizer})
+<!--
+		(projectstatus ps LEFT JOIN useraccount ua ON ps.username = ua.username)
+		LEFT JOIN requeststatus rs ON ua.kanjiname = rs.username
+		WHERE rs.requestday >= #{limitday} AND (ps.admitter1 = #{authorizer} OR rs.seconder = #{authorizer});
+ -->
+
+    </select>
+
+
+    <select id="findRequesterById" resultType="jp.co.growvia.entity.RequestStatus">
+        SELECT *
+        FROM requeststatus
+        WHERE requestid = #{requestid}
+    </select>
+
+    <select id="getUserList" resultType="jp.co.growvia.entity.UserLists">
+		select
+		  useraccount.userid,
+		  useraccount.kanjiname,
+		  useraccount.hiredate,
+		  useraccount.authorizer
+		from useraccount
+		order by userid
+    </select>
+
+    <select id="getAuthorizerList" resultType="jp.co.growvia.entity.UserLists">
+		select
+		  useraccount.userid,
+		  useraccount.kanjiname,
+		  useraccount.hiredate,
+		  useraccount.authorizer
+		from useraccount
+		where authority in (0, 1)
+		order by userid
+    </select>
+
+    <select id="getAllHoliday" resultType="jp.co.growvia.entity.Holiday">
+		SELECT *
+		FROM holiday
+		WHERE DATE_PART('YEAR',day) = #{year}
+    </select>
+
+    <select id="getHolidayByDate" resultType="int">
+		SELECT COUNT(*)
+		FROM holiday
+		WHERE day = #{date}
+    </select>
+
+    <select id="getEmail" resultType="String">
+		SELECT email
+		FROM useraccount
+		WHERE userid = #{userid}
+    </select>
+
 
 </mapper>

@@ -28,6 +28,12 @@ footer {
   width: 100%;
 }
 
+@media screen and (max-height: 450px) {
+	footer {
+	display: none;
+	}
+}
+
 .selecter {
   height: 27px;
   width: 213px;
@@ -117,3 +123,5 @@ footer {
   transform: translateX(100%);/*中身を表示（右へスライド）*/
   box-shadow: 6px 0 25px rgba(0,0,0,.15);
 }
+
+

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.tymeleaf.org" th:fragment="layout (title,body)">
+<html xmlns:th="http://www.tymeleaf.org" th:fragment="layout (title,style,body)">
 <head>
 <meta http-equiv="content-Type"
 	content="text/html" charset="UTF-8" />
@@ -9,6 +9,7 @@
 <link rel="stylesheet" th:href="@{webjars/bootstrap/4.4.1/css/bootstrap.min.css}" type="text/css">
 <script type="text/javascript" th:src="@{webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
 <link rel="stylesheet" th:href="@{/css/template.css}" type="text/css" media="screen, projection">
+<style th:replace="${style}"></style>
 </head>
 <body>
 	<div id="header" th:replace="~{layout/header :: header}"></div>

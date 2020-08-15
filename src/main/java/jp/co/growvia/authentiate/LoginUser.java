@@ -1,6 +1,5 @@
 package jp.co.growvia.authentiate;
 
-import java.time.LocalDate;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -22,16 +21,24 @@ public class LoginUser extends User {
 		return this.user;
 	}
 
+	public String getUserId() {
+		return this.user.getUserid();
+	}
+
 	public int getAuthority() {
 		return this.user.getAuthority();
 	}
 
-	public void setTempDate(LocalDate tempDate) {
+	public void setTempDate(String tempDate) {
 		this.user.setTempdate(tempDate);
 	}
 
-	public LocalDate getTimeDate() {
+	public String getTempDate() {
 		return this.user.getTempdate();
+	}
+
+	public String getEmail() {
+		return this.user.getEmail();
 	}
 
 }

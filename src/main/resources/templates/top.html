@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.tymeleaf.org"
-	th:replace="~{layout/template :: layout(~{::title},~{::body/content()})}">
+	th:replace="~{layout/template :: layout(~{::title},~{::style},~{::body/content()})}">
 <head>
 <title>勤怠管理システム</title>
 <style></style>
 </head>
 <body>
 	<h2>勤怠メニュー</h2>
+	<div style="height: 20px; ">
+	    <span th:if="${alart}"  style="color:red; margin-left: 10px;">
+	        本日、退勤は実施済みです。
+	    </span>
+	    <span th:if="${project}"  style="color:red; margin-left: 10px;">
+	        基本情報を設定して下さい。
+	    </span>
+    </div>
 	<div style="margin-top: 45px;">
 		<input id="adminButton" type="button" value="管理者メニュー" onclick="location.href='./admin'" style="float:left; height: 35px;width: 130px; margin-left: 25px;" />
 		<input id="managerButton" type="button" value="承認者メニュー" onclick="location.href='./requesterList'"  style="float: right; height: 35px;width: 130px; margin-right: 25px;" />
 	</div>
 	<div style="clear: both;"></div>
-	<input type="button" value="出勤/退勤" onclick="location.href='./attended'" style="display: block; width: 150px; height: 100px; margin: 55px auto; " />
+	<form action="attended"  method="post">
+	<input type="submit" value="出勤/退勤" style="display: block; width: 150px; height: 100px; margin: 55px auto; " />
+	</form>
+
 	<input type="button" value="基本情報編集" onclick="location.href='./editBasicInf'" style="display: block; float: left; height: 35px;width: 130px; margin-left: 25px;" />
 	<input type="button" value="勤怠編集" onclick="location.href='./editWorkTime'" style="float: right; height: 35px;width: 115px; margin-right: 25px;" />
 

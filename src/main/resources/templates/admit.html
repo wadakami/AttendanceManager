@@ -1,76 +1,280 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.tymeleaf.org"
-	th:replace="~{layout/template :: layout(~{::title},~{::body/content()})}">
+	th:replace="~{layout/template :: layout(~{::title},~{::style},~{::body/content()})}">
 <head>
 <title>承認確認</title>
-<style></style>
+<style>
+#table-layout {
+	height:338px;
+	overflow:scroll;
+}
+#contents {
+  z-index: 0;
+  font-size: 16px;
+}
+#modal-open {
+  color: #cc0000;
+}
+/* モーダル コンテンツエリア */
+#modal-main, #modal-request {
+	display: none;
+	width: 100%;
+	height: 300px;
+	margin: 0;
+	padding: 0;
+	background-color: #ffffff;
+	color: #666666;
+	position:fixed;
+	z-index: 2;
+}
+/* モーダル 背景エリア */
+#modal-bg {
+	display:none;
+	width:100%;
+	height:100%;
+	background-color: rgba(0,0,0,0.5);
+	position:fixed;
+	top:0;
+	left:0;
+	z-index: 1;
+}
+
+textarea {
+    overflow: auto;
+    resize: horizontal;
+}
+</style>
 </head>
 <body>
 	<div style="display: flex; margin-top:10px;margin-left:15px;">
-		<input type="button" value="＜" onclick="window.history.go(-1);" class="btn btn-primary rounded-circle p-0" style="width:2rem;height:2rem;" />
+		<a th:href="@{/requesterList}">
+			<input type="button" value="＜" class="btn btn-primary rounded-circle p-0" style="width:2rem;height:2rem;" />
+		</a>
 		<h2 style="margin-top:3px;">承認確認</h2>
 	</div>
 	<div style="margin: 0 20px 0 12px;">
-		<p style="float: left">案件名：</p>
-		<p style="text-align: right;">社員番号―氏名</p>
+		<p style="float: left">案件名：<span th:text="${projectStatus.projectname}"></span></p>
+		<p style="text-align: right;"><span id="userId" th:text="${user.userid}"></span>―<span id="requester" th:text="${user.kanjiname}"></span></p>
 	</div>
-	<p style="margin: 5px">◀  2019/1 ▶</p>
-	<table style="margin: 15px auto 15px auto; text-align: center;" >
-		<tr>
-			<th>日付</th>
-			<th>曜日</th>
-			<th>区分</th>
-			<th>出勤時間</th>
-			<th>退勤時間</th>
-			<th>休憩時間</th>
-		</tr>
-		<tr>
-			<td>1</td>
-			<td>月</td>
-			<td>出勤</td>
-			<td>9:00</td>
-			<td>18:00</td>
-			<td>1:00</td>
-		</tr>
-		<tr>
-			<td>2</td>
-			<td>火</td>
-			<td>出勤</td>
-			<td>9:00</td>
-			<td>18:00</td>
-			<td>1:00</td>
-		</tr>
-		<tr>
-			<td>3</td>
-			<td>水</td>
-			<td>出勤</td>
-			<td>9:00</td>
-			<td>18:00</td>
-			<td>1:00</td>
-		</tr>
-		<tr>
-			<td>4</td>
-			<td>木</td>
-			<td>出勤</td>
-			<td>9:00</td>
-			<td>18:00</td>
-			<td>1:00</td>
-		</tr>
-		<tr>
-			<td>5</td>
-			<td>金</td>
-			<td>出勤</td>
-			<td>9:00</td>
-			<td>18:00</td>
-			<td>1:00</td>
-		</tr>
-	</table>
-	<div style="margin: 0 7px 0 10px;">
-		<p style="margin-top: 84px; font-size: 13px;">申請者コメント:ご確認のほどよろしくお願いいたします。</p>
-		<p>コメント</p>
-		<textarea  name="comment" rows="4" cols="40" style="float: left"></textarea>
-		<input type="button" value="承認" style="margin: 5px 0 0 auto; width: 60px; display: block;"  />
-		<input type="button" value="否認" style="margin: 5px 0 0 auto; width: 60px; display: block;"  />
+	<p style="margin: 5px 5px 5px 12px">
+		<span id="month" th:text="${request.targetmonth}"></span>
+	</p>
+	<div id="table-layout">
+		<table style="margin: 15px auto 15px auto; text-align: center;" >
+			<tr>
+				<th>日付</th>
+				<th>曜日</th>
+				<th>区分</th>
+				<th>出勤時間</th>
+				<th>退勤時間</th>
+				<th>休憩時間</th>
+			</tr>
+			<tr th:each="stat, propaty : ${attendance}">
+				<td th:text="${propaty.count}"></td>
+				<td th:text="${stat.day}"></td>
+				<td th:text="${stat.status}"></td>
+				<td th:text="${stat.starttime}"></td>
+				<td th:text="${stat.endtime}"></td>
+				<td th:text="${stat.resttime}"></td>
+			</tr>
+		</table>
 	</div>
+	<div th:if="${request.status != '承認済み'}" style="margin: 6px 7px 0 10px; border-top: solid brown;">
+		<p style="font-size: 13px; height: 36px; margin: 5px 0 0 0; visibility: hidden;">コメント一覧</p>
+
+		<textarea  id="comment" rows="2" cols="40" placeholder="コメント" style="float: left"></textarea>
+		<input type="button" class="two-button" value="承認" style="margin: -2px 0 0 auto; width: 60px; display: block;"  />
+		<input type="button" class="two-button" value="否認" style="margin: 5px 0 0 auto; width: 60px; display: block;"  />
+	</div>
+	<div th:if="${request.status == '承認済み'}" style="margin: 6px 7px 0 10px; border-top: solid brown; text-align:center;">
+		<div style="">
+			<p style="margin-top: 1rem;"><span th:text="${request.requestday}"></span>に申請された</p>
+			<p>リクエストは承認済みです</p>
+		</div>
+	</div>
+
+
+	<!--  モーダル背景 -->
+	<div id="modal-bg" style="display:none;"></div>
+
+	<div id="modal-main">
+		<div class="modal-container" style="margin-top: 20%;text-align: center;">
+			<p><span th:text="${request.requestday}"></span>申請分の</p>
+			<p>リクエストを<span id="two-way"></span>しました。</p>
+			<div class="button-area" style="margin-top: 15%;">
+				<input type="button" class="cancel-button"  value="閉じる" />
+			</div>
+		</div>
+	</div>
+	<script th:inline="javascript">
+
+	var id = /*[[${request.requestid}]]*/ ;
+
+
+	$(window).on('load', function() {
+    	var h = $(window).height();
+    	var w = $(window).width();
+
+    	var result = h - 330;
+        $("#table-layout").css({
+            "height": result + "px"
+      	});
+        var textarea = w - 80;
+        $("textarea").css({
+            "width": textarea + "px"
+      	});
+	});
+
+	//modal
+	$(function(){
+
+    	//モーダル以外をクリックしたらモーダルを閉じる
+        $("#modal-bg, .cancel-button").click(function(){
+        	$("#modal-main,#modal-bg").fadeOut("slow",function(){
+            	$('#modal-bg').hide() ;
+         	});
+
+        });
+
+	    $(".two-button").click(function() {
+
+		    //画面中央を計算する関数を実行
+		    modalResize();
+
+		    //モーダルウィンドウを表示
+		        $("#modal-bg,#modal-main").fadeIn("slow");
+
+		    //画面の左上からmodal-mainの横幅・高さを引き、その値を2で割ると画面中央の位置が計算できます
+		     $(window).resize(modalResize);
+		      function modalResize(){
+
+		            var w = $(window).width();
+		          var h = $(window).height();
+
+		            var cw = $("#modal-main").outerWidth();
+		           var ch = $("#modal-main").outerHeight();
+
+		        //取得した値をcssに追加する
+		            $("#modal-main").css({
+		                "top": ((h - ch)/2) + "px"
+		          });
+		     }
+
+	    	var buttonType = $(this).val();
+	    	$('#two-way').text(buttonType);
+
+	    	var mailContainer = {};
+	    	mailContainer["requester"] = $('#userId').text();
+	    	mailContainer["comment"] = $('#comment').val();
+	    	mailContainer["status"] = buttonType;
+	    	mailContainer["id"] = id;
+
+	        $.ajax({
+	            type        : "POST",
+	            url         : "api/admitRequest",
+	            data        : JSON.stringify(mailContainer),
+	            contentType: 'application/json',
+	            }).then(
+	            	function (result) {
+	                	console.log('成功時の処理が書けます。下のように。');
+	                	let content = result.content;
+	                	openModal();
+                	}, function () {
+	                	console.log('失敗時の処理が書けます');
+              });
+	    });
+
+		function openModal(){
+
+		    //画面中央を計算する関数を実行
+		    modalResize();
+
+		    //モーダルウィンドウを表示
+	        $("#modal-bg,#modal-main").fadeIn("slow");
+
+		    //画面の左上からmodal-mainの横幅・高さを引き、その値を2で割ると画面中央の位置が計算できます
+		     $(window).resize(modalResize);
+		      function modalResize(){
+
+		            var w = $(window).width();
+		          var h = $(window).height();
+
+		            var cw = $("#modal-main").outerWidth();
+		           var ch = $("#modal-main").outerHeight();
+
+		        //取得した値をcssに追加する
+		            $("#modal-main").css({
+		                "top": ((h - ch)/2) + "px"
+		          });
+		     }
+		   };
+
+
+		    $("#back, #forward").click(function() {
+
+		    	URL = 'api/getAttendance';
+		    	URL += '?type=' + $(this).attr('id');
+		    	URL += '&month=' + $('#month').text();
+		    	URL += '&id=' + id;
+
+		    	console.log(URL);
+
+		        $.ajax({
+		            type        : "GET",
+		            url         : URL,
+		            contentType: 'application/json',
+		            }).then(
+		            	function (result) {
+		                	console.log('成功時の処理が書けます。下のように。');
+		                	removeTable();
+		                	makeTable(result);
+
+		            	}, function () {
+		                	console.log('失敗時の処理が書けます');
+	              });
+		    });
+
+		    function removeTable() {
+				$('table tr').each(function(i, e){
+			    	if (i != 0) {
+						$(this).remove();
+					}
+				});
+
+		    };
+
+
+		    function makeTable(data){
+
+		    	var table;
+		    	var month;
+		    	$.each(data, function(i, v){
+            		if(i == 0) {
+            			month = v.attenddate;
+            		}
+            		var date = i + 1;
+            		table += '<tr>';
+            		table += '<td>' + date + '</td>';
+            		table += '<td>' + v.day + '</td>';
+            		table += '<td>' + v.status + '</td>';
+            		table += '<td>' + v.starttime + '</td>';
+            		table += '<td>' + v.endtime + '</td>';
+            		table += '<td>' + v.resttime + '</td>';
+    				table += '</tr>';
+            	});
+
+		    	$('table').append(table);
+
+            	//対象月の変更
+            	var div = month.split('-');
+
+            	$('#month').text(div[0] + '/' + div[1]);
+
+		    };
+
+		});
+
+
+	</script>
 </body>
 </html>

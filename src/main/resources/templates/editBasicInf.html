@@ -1,35 +1,187 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.tymeleaf.org"
-	th:replace="~{layout/template :: layout(~{::title},~{::body/content()})}">
+	th:replace="~{layout/template :: layout(~{::title},~{::style},~{::body/content()})}">
 <head>
 <title>基本情報編集</title>
 <style>
+
+#contents {
+  z-index: 0;
+  font-size: 16px;
+}
+#modal-open {
+  color: #cc0000;
+}
+/* モーダル コンテンツエリア */
+#modal-main, #modal-request {
+	display: none;
+	width: 100%;
+	height: 300px;
+	margin: 0;
+	padding: 0;
+	background-color: #ffffff;
+	color: #666666;
+	position:fixed;
+	z-index: 2;
+}
+/* モーダル 背景エリア */
+#modal-bg {
+	display:none;
+	width:100%;
+	height:100%;
+	background-color: rgba(0,0,0,0.5);
+	position:fixed;
+	top:0;
+	left:0;
+	z-index: 1;
+}
+
+.modal-container {
+	text-align: center;
+}
+
+
+.edit-container {
+	text-align: center;
+	margin-top: 50px;
+}
+
+.edit-container div{
+	margin-top:15px;
+}
+
+.edit-container {
+
+}
+
+table {
+	margin: auto;
+    line-height: 2em;
+}
+
+table th {
+	text-align: right;
+}
+
 </style>
 </head>
 <body>
 	<div style="display: flex; margin-top:30px;margin-left:15px;">
-		<input type="button" value="＜" onclick="window.history.go(-1);" class="btn btn-primary rounded-circle p-0" style="width:2rem;height:2rem;" />
+		<a th:href="@{/top}">
+			<input type="button" value="＜" class="btn btn-primary rounded-circle p-0" style="width:2rem;height:2rem;" />
+		</a>
 		<h2 style="margin-top:3px;">基本情報編集</h2>
 	</div>
-	<div style="text-align: center;">
-		<div>
-			<p style="display: contents;">　案件名：</p>
-			<input type="text" placeholder="案件名" style="height: 23px; width: 210px; margin: auto; margin-bottom: 13px;" />
-		</div>
-		<div>
-			<p style="display: contents;">　　出勤：</p>
-			<input type="text" placeholder="出勤" style="height: 23px; width: 210px; margin: auto; margin-bottom: 13px;" />
-		</div>
-		<div>
-			<p style="display: contents;">　　退勤：</p>
-			<input type="text" placeholder="退勤" style="height: 23px; width: 210px; margin: auto; margin-bottom: 13px;" />
-		</div>
-		<div>
-			<p style="display: contents;">休憩時間：</p>
-			<input type="text" placeholder="休憩時間" style="height: 23px; width: 210px; margin: auto; margin-bottom: 13px;" />
+	<div class="edit-container">
+		<table>
+			<tr>
+				<th>案件名：</th>
+				<td>
+					<span id="project" th:text="${project.projectname}" style="height: 23px; width: 210px; margin: auto; margin-bottom: 13px;"></span>
+				</td>
+			</tr>
+			<tr>
+				<th>出勤：</th>
+				<td>
+					<span id="starttime" th:text="${project.starttime}" style="height: 23px; width: 210px; margin: auto; margin-bottom: 13px;"></span>
+				</td>
+			</tr>
+			<tr>
+				<th>退勤：</th>
+				<td>
+					<span id="endtime" th:text="${project.endtime}" style="height: 23px; width: 210px; margin: auto; margin-bottom: 13px;"></span>
+				</td>
+			</tr>
+			<tr>
+				<th>休憩時間：</th>
+				<td>
+					<span id="resttime" th:text="${project.resttime}" style="height: 23px; width: 210px; margin: auto; margin-bottom: 13px;"></span>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<input type="button" id="change-info" value="変更" style="margin: 10px 30px 0 auto; width: 80px; display: none;"  />
+
+		<!--  モーダル背景 -->
+	<div id="modal-bg" style="display:none;"></div>
+
+	<div id="modal-main">
+		<div class="modal-container" style="margin-top: 20%;">
+			<p>基本情報を変更しますか？</p>
+			<div class="button-area" style="margin-top: 15%;">
+				<input id="sendRegist" type="button"  value="変更" style="width: 96px;" />
+				<input type="button" class="cancel-button"  value="キャンセル" style="margin: 24px 0 0 105px;"/>
+			</div>
 		</div>
 	</div>
-	<input type="button" value="変更" style="margin: 10px 30px 0 auto; width: 80px; display: block;"  />
+
+	<script th:inline="javascript">
+		//var authirity = /*[[${authirity}]]*/ ;
+		//modal
+		$(function(){
+
+		    //モーダル以外をクリックしたらモーダルを閉じる
+		      $("#modal-bg, #sendRegist, .cancel-button").click(function(){
+		          $("#modal-bg, #modal-main").fadeOut("slow",function(){
+		              $('#modal-bg').hide() ;
+		         });
+
+		        });
+
+		 $("#change-info").click(function(){
+
+		    //画面中央を計算する関数を実行
+		    modalResize();
+
+		    //モーダルウィンドウを表示
+		        $("#modal-bg,#modal-main").fadeIn("slow");
+
+		    //画面の左上からmodal-mainの横幅・高さを引き、その値を2で割ると画面中央の位置が計算できます
+		     $(window).resize(modalResize);
+		      function modalResize(){
+
+		            var w = $(window).width();
+		          var h = $(window).height();
+
+		            var cw = $("#modal-main").outerWidth();
+		           var ch = $("#modal-main").outerHeight();
+
+		        //取得した値をcssに追加する
+		            $("#modal-main").css({
+		                "top": ((h - ch)/2) + "px"
+		          });
+		     }
+		   });
+		});
+
+		$(function() {
+		    // Ajax通信テスト ボタンクリック
+		    $("#sendRegist").click(function() {
+
+		    	var project = {};
+		    	project["project"] = $('#project').val();
+		    	project["starttime"] = $('#starttime').val();
+		    	project["endtime"] = $('#endtime').val();
+		    	project["resttime"] = $('#resttime').val();
+
+		    	$.ajax({
+		            type        : "POST",
+		            url         : "api/changeInfo",
+		            data        : JSON.stringify(project),
+		            contentType: 'application/json',
+		            }).then(
+		            	function (result) {
+		                	console.log('成功時の処理が書けます。下のように。');
+		                	let content = result.project;
+		                	console.log(content);
+	                	}, function () {
+		                	console.log('失敗時の処理が書けます');
+	              });
+		    });
+
+		    // modalを消す
+		});
+	</script>
 
 </body>
 </html>

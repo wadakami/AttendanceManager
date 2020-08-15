@@ -21,7 +21,7 @@ public class UserAccount implements UserDetails {
 
 	@Id
 	@Column(nullable = true, unique = true)
-	private long id;
+	private String userid;
 
 	@Column(nullable = true)
 	private String username;
@@ -45,14 +45,23 @@ public class UserAccount implements UserDetails {
 	private boolean enabled;
 
 	@Column(nullable = false)
-	private LocalDate tempdate;
+	private String tempdate;
 
-	public long getId() {
-		return id;
+	@Column(nullable = false)
+	private String email;
+
+	@Column(nullable = false)
+	private String authorizer;
+
+	@Column(nullable = false)
+	private Integer projectid;
+
+	public String getUserid() {
+		return userid;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setUserid(String id) {
+		this.userid = id;
 	}
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

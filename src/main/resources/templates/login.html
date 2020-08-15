@@ -17,7 +17,7 @@
 	</div>
 	<div style="text-align: center; display: grid;">
 
-		<form th:action="@{/top}" method="POST" style="margin-top: 110px;">
+		<form th:action="@{/authenticate}" method="POST" style="margin-top: 110px;">
 			<h3>GrowVia勤怠システムへのログイン</h3>
 	        <div th:if="${param.error}">
 	            ユーザー名かパスワードが正しくありません。
